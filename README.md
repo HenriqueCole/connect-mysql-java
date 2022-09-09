@@ -1,1 +1,1 @@
-# connect-mysql-java
+# Connect MySQL on java
