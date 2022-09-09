@@ -1,4 +1,5 @@
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -9,8 +10,19 @@ public class TestSelect {
         ConnectionDatabase connectionDatabase = new ConnectionDatabase();
         Connection connection = connectionDatabase.connectBD();
         Statement statement = connection.createStatement();
-        statement.execute(sql);
-        System.out.println("Contact selected successfully!");
-        connection.close();
+        statement.executeQuery(sql);
+        ResultSet resultSet = statement.executeQuery(sql);
+        if (resultSet != null && resultSet.next()) {
+            Contact contact = new Contact(
+                    resultSet.getInt("id"),
+                    resultSet.getString("name"),
+                    resultSet.getString("email"),
+                    resultSet.getString("phone"),
+                    resultSet.getInt("age")
+            );
+            System.out.println(contact);
+        } else {
+            System.out.println("Contact not found!");
+        }
     }
 }
