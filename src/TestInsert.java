@@ -2,9 +2,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class TestConnection {
+public class TestInsert {
     public static void main(String[] args) throws SQLException {
-        Contact contact = new Contact("Cole", "cole@gmail.com", "99999-9999", 17);
+        Contact contact = new Contact("The man", "theman@gmail.com", "99999-9999", 17);
 
         String sql = "INSERT INTO contacts (name, email, phone, age)" +
                 "VALUES ('" + contact.getName() + "', '" + contact.getEmail() + "', '" + contact.getPhone() + "', '" + contact.getAge() + "')";
@@ -12,6 +12,7 @@ public class TestConnection {
         Connection connection = connectionDatabase.connectBD();
         Statement statement = connection.createStatement();
         statement.execute(sql);
+        System.out.println("Contact inserted successfully!");
         connection.close();
     }
 }

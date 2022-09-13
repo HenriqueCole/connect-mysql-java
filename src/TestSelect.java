@@ -5,15 +5,19 @@ import java.sql.Statement;
 
 public class TestSelect {
     public static void main(String[] args) throws SQLException {
-        int id = 2;
+        select("2; DROP TABLE contacts");
+    }
+
+    public static Contact select(Object id) throws SQLException {
         String sql = "SELECT * FROM contacts WHERE id = " + id;
         ConnectionDatabase connectionDatabase = new ConnectionDatabase();
         Connection connection = connectionDatabase.connectBD();
         Statement statement = connection.createStatement();
         statement.executeQuery(sql);
         ResultSet resultSet = statement.executeQuery(sql);
+        Contact contact = null;
         if (resultSet != null && resultSet.next()) {
-            Contact contact = new Contact(
+            contact = new Contact(
                     resultSet.getInt("id"),
                     resultSet.getString("name"),
                     resultSet.getString("email"),
@@ -24,5 +28,7 @@ public class TestSelect {
         } else {
             System.out.println("Contact not found!");
         }
+        connection.close();
+        return contact;
     }
 }
