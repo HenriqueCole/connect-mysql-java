@@ -1,3 +1,5 @@
+package Statement;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,7 +12,7 @@ public class TestDelete {
         Connection connection = connectionDatabase.connectBD();
         Statement statement = connection.createStatement();
         statement.execute(sql);
-        System.out.println("Contact deleted successfully!");
+        System.out.println("Statement.Contact deleted successfully!");
         connection.close();
     }
 }
